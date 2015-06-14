@@ -1,0 +1,62 @@
+/md-progress-linear md-mode="indeterminate" ng-show="loading"
+md-content style="height: 100%;"
+  section
+    md-subheader ng-class="{'md-primary': (currentTotal < (total / divider)), 'md-warn': (currentTotal >= (total / divider))}" 
+      section.total layout="column"
+        .md-title
+          | {{currentTotal|currency}} / {{total / divider|currency}} {{'EVERY_DAY'|translate}}
+        .md-caption
+          | {{total|currency}} du {{now|date:'dd'}} au {{days}} {{now|date:'MMMM'}}
+    md-list
+      md-list-item ng-repeat="projection in projections" layout="row" layout-align="space-between center" layout-wrap="true"
+        md-divider
+        p ui-sref="projections.edit({id:projection.id})"
+          | {{projection.label}}
+        h2.md-title ui-sref="projections.edit({id:projection.id})"
+          | {{projection.variation / divider|currency}}
+          /span.recurrence
+            / | {{'EVERY_DAY'|translate}}
+          span.variation-full ng-show="projection.recurring"
+            | {{projection.variation|currency}} {{'EVERY_MONTH'|translate}}
+          span.variation-full ng-hide="projection.recurring"
+            | {{projection.variation|currency}} le {{projection.created_at|date}}
+
+nav [
+	mfb-menu="true"
+	position="br"
+	effect="zoomin"
+	resting-icon="menu"
+	active-icon="close"
+	template-url="ng-mfb-menu-md.tpl.html"
+]
+    a [
+				mfb-button="true"
+                icon="spending"
+				template-url="ng-mfb-button-md.tpl.html"
+                label="{{'ADD_SPENDING'|translate}}"
+                mfb-button-close="true"
+                ui-sref="projections.new({type:'spending'})" ]
+
+	a [
+				mfb-button="true"
+				icon="income"
+				template-url="ng-mfb-button-md.tpl.html"
+                label="{{'ADD_INCOME'|translate}}"
+                mfb-button-close="true"
+                ui-sref="projections.new({type:'income'})" ]
+
+	a [
+				mfb-button="true"
+				icon="settings"
+				template-url="ng-mfb-button-md.tpl.html"
+                label="{{'SETTINGS'|translate}}"
+                mfb-button-close="true"
+                ui-sref="edges.all.delete" ]
+
+	a [
+				mfb-button="true"
+				icon="disconnect"
+				template-url="ng-mfb-button-md.tpl.html"
+                label="{{'DISCONNECT'|translate}}"
+                mfb-button-close="true"
+				ng-click="logout()" ]

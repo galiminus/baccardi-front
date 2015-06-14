@@ -1,0 +1,24 @@
+md-dialog flex="80" flex-gt-md="30" aria-label="{{'ADD_PROJECTION'|translate}}"
+  md-content.sticky-container
+    form name="projectionNew"
+      .dialog-content layout="row" layout-wrap="true" layout-padding="true"
+        md-input-container flex-gt-md="60" flex="100"
+          label
+            | {{'LABEL_ADD'|translate}}
+          input ng-required="true" name="label" ng-model="projection.label" aria-label="Label"
+        md-input-container flex-gt-md="40" flex="100"
+          label ng-if="type=='income'"
+            | {{'INCOME_ADD'|translate}}
+          label ng-if="type=='spending'"
+            | {{'SPENDING_ADD'|translate}}
+          input ng-required="true" name="variation" ng-model="projection.variation" type="number" aria-label="Variation"
+
+        section flex="100" layout="row" layout-padding="true" layout-align="space-between"
+          p layout-padding="true"
+            | {{'RECURRING'|translate}}
+          md-switch ng-model="projection.recurring" aria-label="recurring"
+
+
+      .md-actions layout="row"
+        md-button.md-primary ng-click="create()" ng-disabled="projectionNew.$invalid"
+          | {{'CREATE'|translate}}

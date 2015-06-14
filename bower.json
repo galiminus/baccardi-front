@@ -1,0 +1,32 @@
+{
+  "name": "baccardi-front",
+  "version": "0.1.0",
+  "authors": [
+    "Victor Goya <goya.victor@gmail.com>"
+  ],
+  "description": "Frontend for the Baccardi API",
+  "main": "build/javascripts/application.js",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/assets/bower",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "satellizer": "~0.11.2",
+    "angular": "~1.4.0",
+    "angular-translate": "~2.7.2",
+    "angular-ui-router": "~0.2.15",
+    "restangular": "~1.5.1",
+    "angular-material": "~0.9.8",
+    "angular-animate": "~1.4.0",
+    "angular-aria": "~1.4.0",
+    "underscore": "~1.8.3",
+    "ng-mfb": "~0.6.1",
+    "angular-i18n": "~1.4.0"
+  }
+}

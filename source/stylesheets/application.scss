@@ -1,0 +1,49 @@
+@import url(//fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,latin-ext);
+@import "angular-material";
+@import "ng-mfb";
+
+main {
+    height: 90%;
+
+    &.login {
+        text-align: center;
+    }
+}
+
+md-list {
+    padding-bottom: 110px;
+}
+
+.total {
+    text-transform: uppercase;
+    > .md-caption {
+        padding-top: 1em;
+    }
+    .md-title .md-caption {
+        display: inline;
+        padding-left: 1em;
+    }
+}
+
+h2.md-title {
+    text-align: right;
+    .recurrence {
+        font-size: 0.7em;
+        color: #000;
+        line-height: 1.9em;
+        text-transform: lowercase;
+	padding-left: 0.5em;
+    }
+    .variation-full {
+        display: block;
+        font-size: 0.7em;
+        color: #888;
+        line-height: 1.9em;
+        text-transform: lowercase;
+    }
+}
+
+md-progress-linear {
+    height: 10px;
+    margin-top: -5px;
+}
