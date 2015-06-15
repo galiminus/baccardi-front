@@ -23,4 +23,5 @@
 //= require ng-mfb
 //= require baccardi
 //= require_tree ./initializers
+//= require_tree ./controllers
 

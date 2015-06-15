@@ -15,46 +15,13 @@ angular.module("app").config ($stateProvider, $urlRouterProvider) ->
       url: "/projections"
       templateUrl: "templates/projections-template.html"
       resolve:
-        now: ->
-          new Date()
-        endOfMonth: (now) ->
-          new Date(now.getFullYear(), now.getMonth() + 1, 0)
         user: (Restangular) ->
           Restangular.one("users", sessionStorage.getItem("id"))
-        projections: (user, Restangular) ->
+        all: (user, Restangular) ->
           user.all("projections").getList()
-        currentProjections: (projections, now) ->
 
-      controller: ($scope, $state, projections, currentProjections, now, endOfMonth) ->
-        $scope.projections = projections
-        $scope.now = now
-        $scope.days = endOfMonth.getDate()
-        $scope.divider = ($scope.days - now.getDate() + 1)
-
-        $scope.logout = ->
-          sessionStorage.removeItem("id")
-          $state.go "login"
-
-        $scope.$watch "projections", (projections) ->
-          return unless projections
-
-          if projections.length == 0
-            $scope.total = null
-          else
-            $scope.total = projections.map (projection) ->
-              projection.variation
-            .reduce (x, y) -> x + y
-
-            currentProjections = (projection for projection in projections when \
-              (new Date(projection.created_at).getDate() == now.getDate() && !projection.recurring))
-
-            if currentProjections.length == 0
-              $scope.currentTotal = 0
-            else
-              $scope.currentTotal = currentProjections.map (projection) ->
-                projection.variation * -1
-              .reduce (x, y) -> x + y
-        , true
+      controller: "ProjectionsController"
+      controllerAs: 'projections'
 
     .state "projections.new",
       url: "/new/:type"

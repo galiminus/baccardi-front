@@ -1,21 +1,19 @@
 /md-progress-linear md-mode="indeterminate" ng-show="loading"
 md-content style="height: 100%;"
   section
-    md-subheader ng-class="{'md-primary': (currentTotal < (total / divider)), 'md-warn': (currentTotal >= (total / divider))}" 
+    md-subheader ng-class="{'md-primary': projections.currentTotal < moneyPerDay, 'md-warn': projections.currentTotal >= moneyPerDay}"
       section.total layout="column"
         .md-title
-          | {{currentTotal|currency}} / {{total / divider|currency}} {{'EVERY_DAY'|translate}}
+          | {{projections.currentTotal|currency}} / {{projections.total / projections.divider|currency}} {{'EVERY_DAY'|translate}}
         .md-caption
-          | {{total|currency}} du {{now|date:'dd'}} au {{days}} {{now|date:'MMMM'}}
+          | {{projections.total|currency}} du {{projections.now|date:'dd'}} au {{projections.days}} {{projections.now|date:'MMMM'}}
     md-list
-      md-list-item ng-repeat="projection in projections" layout="row" layout-align="space-between center" layout-wrap="true"
+      md-list-item ng-repeat="projection in projections.all" layout="row" layout-align="space-between center" layout-wrap="true"
         md-divider
         p ui-sref="projections.edit({id:projection.id})"
           | {{projection.label}}
         h2.md-title ui-sref="projections.edit({id:projection.id})"
-          | {{projection.variation / divider|currency}}
-          /span.recurrence
-            / | {{'EVERY_DAY'|translate}}
+          | {{projection.variation / projections.days|currency}}
           span.variation-full ng-show="projection.recurring"
             | {{projection.variation|currency}} {{'EVERY_MONTH'|translate}}
           span.variation-full ng-hide="projection.recurring"
