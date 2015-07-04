@@ -4,14 +4,13 @@ angular.module("app").controller "ProjectionsController",
     "$state"
     "all"
     ($scope, $state, @all) ->
+      if @all.length == 0
+        return $state.go "projections.new"
+
       @now = new Date()
       @endOfMonth = new Date(@now.getFullYear(), @now.getMonth() + 1, 0)
       @days = @endOfMonth.getDate()
       @divider = @days - @now.getDate() + 1
-
-      @logout = ->
-        sessionStorage.removeItem("id")
-        $state.go "login"
 
       $scope.$watch =>
         @all

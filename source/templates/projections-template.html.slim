@@ -1,10 +1,10 @@
 /md-progress-linear md-mode="indeterminate" ng-show="loading"
-md-content style="height: 100%;"
+md-content style="height: 100%;" ng-show="projections.all.length"
   section
     md-subheader ng-class="{'md-primary': projections.currentTotal < moneyPerDay, 'md-warn': projections.currentTotal >= moneyPerDay}"
       section.total layout="column"
         .md-title
-          | {{projections.currentTotal|currency}} / {{projections.total / projections.divider|currency}} {{'EVERY_DAY'|translate}}
+          | {{projections.currentTotal|currency}} {{'SPENT_ON'|translate}} {{projections.total / projections.divider|currency}} {{'EVERY_DAY'|translate}}
         .md-caption
           | {{projections.total|currency}} du {{projections.now|date:'dd'}} au {{projections.days}} {{projections.now|date:'MMMM'}}
     md-list
@@ -50,11 +50,3 @@ nav [
                 label="{{'SETTINGS'|translate}}"
                 mfb-button-close="true"
                 ui-sref="edges.all.delete" ]
-
-	a [
-				mfb-button="true"
-				icon="disconnect"
-				template-url="ng-mfb-button-md.tpl.html"
-                label="{{'DISCONNECT'|translate}}"
-                mfb-button-close="true"
-				ng-click="logout()" ]

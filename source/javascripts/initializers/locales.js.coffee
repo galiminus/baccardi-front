@@ -18,5 +18,6 @@ angular.module("app").config ($translateProvider) ->
     SETTINGS: "Modifier les options"
     DISCONNECT: "Se déconnecter"
     REMAINING: "reste"
+    SPENT_ON: "/"
 
   $translateProvider.preferredLanguage('fr')

@@ -25,7 +25,7 @@ angular.module("app").config ($stateProvider, $urlRouterProvider) ->
 
     .state "projections.new",
       url: "/new/:type"
-      onEnter: ($mdDialog, $state, $stateParams, Restangular, user, projections) ->
+      onEnter: ($mdDialog, $state, $stateParams, Restangular, user, all) ->
         $mdDialog.show
           clickOutsideToClose: true
           templateUrl: "templates/projections-new-dialog-template.html"
@@ -38,7 +38,7 @@ angular.module("app").config ($stateProvider, $urlRouterProvider) ->
 
               $mdDialog.hide()
               user.all("projections").post($scope.projection).then (projection) ->
-                projections.unshift projection
+                all.unshift projection
 
         .finally ->
           $state.go "projections"
@@ -46,10 +46,10 @@ angular.module("app").config ($stateProvider, $urlRouterProvider) ->
     .state "projections.edit",
       url: "/:id/edit"
       resolve:
-        projection: (user, projections, Restangular, $stateParams) ->
-          (projection for projection in projections when projection.id is Number($stateParams.id))[0]
+        projection: (user, all, Restangular, $stateParams) ->
+          (projection for projection in all when projection.id is Number($stateParams.id))[0]
 
-      onEnter: ($mdDialog, $state, Restangular, user, projection, projections) ->
+      onEnter: ($mdDialog, $state, Restangular, user, projection, all) ->
         $mdDialog.show
           clickOutsideToClose: true
           templateUrl: "templates/projections-edit-dialog-template.html"
@@ -63,8 +63,8 @@ angular.module("app").config ($stateProvider, $urlRouterProvider) ->
 
             $scope.destroy = ->
               $scope.projection.remove().then ->
-                index = projections.indexOf projection
-                projections.splice index, 1
+                index = all.indexOf projection
+                all.splice index, 1
                 $mdDialog.hide()
 
             $scope.update = ->
